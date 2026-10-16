@@ -1,1 +1,89 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratório | Sinais do Universo</title><link rel="stylesheet" href="../css/main.css"></head><body><div class="progress" id="progressLine"></div><header class="topbar"><div class="nav-wrap"><a class="brand" href="../index.html"><i class="brand-mark"></i>SINAIS DO UNIVERSO</a><nav class="nav" id="nav"><a href="../index.html">Início</a><a href="museu.html">Museu</a><a href="universo.html">Universo</a><a href="sistema-solar.html">Sistema Solar</a><a href="exploracao.html">Exploração</a><a href="fenomenos.html">Fenômenos</a><a href="laboratorio.html">Laboratório</a><a href="glossario.html">Glossário</a></nav><div class="nav-actions"><button class="icon-btn" id="themeBtn">◐</button><button class="menu-btn" id="menuBtn">☰</button></div></div></header><main><section class="page-hero"><span class="eyebrow">EXPERIMENTOS DIGITAIS</span><h1>Transforme números em experiência.</h1><p>Pequenas simulações educativas para visualizar gravidade e o tempo de viagem da luz.</p></section><section class="section"><div class="lab-grid"><article class="panel lab-card"><span class="eyebrow">01 · GRAVIDADE</span><h2>Peso em diferentes mundos</h2><p style="color:var(--muted)">A massa permanece a mesma; o peso muda conforme a aceleração gravitacional.</p><input class="range" id="labMass" type="range" min="1" max="150" value="70"><input class="range" id="labGravity" type="range" min="1.62" max="24.79" step=".01" value="9.81"><div class="lab-result" id="labWeight">686,7 N</div><span id="labPlanet">70 kg · gravidade 9,81 m/s²</span></article><article class="panel lab-card"><span class="eyebrow">02 · VELOCIDADE DA LUZ</span><h2>Quanto tempo a luz leva?</h2><p style="color:var(--muted)">Escolha uma distância em milhares de quilômetros.</p><input class="range" id="lightDistance" type="range" min="1000" max="4500000000" step="1000000" value="149600000"><div class="lab-result" id="lightOutput">8,31 min</div><span>c ≈ 299.792 km/s no vácuo</span></article></div></section></main><script src="../js/data.js"></script><script src="../js/main.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Laboratório | Sinais do Universo</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <div class="progress" id="progressLine"></div>
+  <header class="topbar">
+    <div class="nav-wrap">
+      <a class="brand" href="../index.html"><i class="brand-mark"></i>SINAIS DO UNIVERSO</a>
+      <nav class="nav" id="nav">
+        <a href="../index.html">Início</a>
+        <a href="museu.html">Museu</a>
+        <a href="universo.html">Universo</a>
+        <a href="sistema-solar.html">Sistema Solar</a>
+        <a href="exploracao.html">Exploração</a>
+        <a href="fenomenos.html">Fenômenos</a>
+        <a href="laboratorio.html">Laboratório</a>
+        <a href="glossario.html">Glossário</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn">◐</button>
+        <button class="menu-btn" id="menuBtn">☰</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero">
+      <span class="eyebrow">EXPERIMENTOS DIGITAIS</span>
+      <h1>Transforme números em experiência.</h1>
+      <p>Compare o peso em mundos diferentes e descubra quanto tempo a luz leva para percorrer distâncias no espaço.</p>
+    </section>
+    <section class="section">
+      <div class="lab-grid">
+        <article class="panel lab-card">
+          <span class="eyebrow">01 · GRAVIDADE</span>
+          <h2>Peso em diferentes mundos</h2>
+          <p class="lab-description">Digite sua massa e escolha um astro. Massa é a quantidade de matéria; peso é a força da gravidade sobre ela.</p>
+          <label class="lab-label" for="labMass">Sua massa (kg)</label>
+          <input class="search lab-number" id="labMass" type="number" min="1" max="300" step="0.1" value="70" inputmode="decimal">
+          <label class="lab-label" for="labGravity">Escolha um mundo</label>
+          <select class="select lab-select" id="labGravity">
+            <option value="moon" data-gravity="1.62" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html">Lua — 1,62 m/s²</option>
+            <option value="mercury" data-gravity="3.70" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html">Mercúrio — 3,70 m/s²</option>
+            <option value="venus" data-gravity="8.87" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html">Vênus — 8,87 m/s²</option>
+            <option value="earth" data-gravity="9.80665" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html" selected>Terra — 9,80665 m/s²</option>
+            <option value="mars" data-gravity="3.73" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">Marte — 3,73 m/s²</option>
+            <option value="jupiter" data-gravity="25.92" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html">Júpiter — 25,92 m/s²</option>
+            <option value="saturn" data-gravity="11.19" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html">Saturno — 11,19 m/s²</option>
+            <option value="uranus" data-gravity="9.01" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html">Urano — 9,01 m/s²</option>
+            <option value="neptune" data-gravity="11.27" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html">Netuno — 11,27 m/s²</option>
+          </select>
+          <div class="lab-result" id="labWeight" aria-live="polite">686,5 N</div>
+          <p class="light-range-note">N (newton) é a unidade usada para medir força.</p>
+          <span id="labPlanet">Peso de 70 kg na Terra</span>
+          <p class="lab-source">Gravidade de referência conforme a ficha planetária da NASA: <a id="gravitySource" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html" target="_blank" rel="noopener noreferrer">ver fonte do astro selecionado</a>.</p>
+          <p class="light-range-note">O Sol não está incluído: a comparação é entre a Lua e os oito planetas. Gigantes gasosos não têm superfície sólida; seus valores são referências de gravidade.</p>
+        </article>
+        <article class="panel lab-card">
+          <span class="eyebrow">02 · VELOCIDADE DA LUZ</span>
+          <h2>Quanto tempo a luz leva?</h2>
+          <p class="lab-description">Selecione um destino para ver o tempo aproximado de viagem da luz, só de ida.</p>
+          <label class="lab-label" for="lightDestination">De onde a luz parte e qual é o destino?</label>
+          <select class="select lab-select" id="lightDestination">
+            <option value="moon" data-distance-km="384400" data-direction="Terra → Lua" data-distance-type="distância média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html">Terra → Lua</option>
+            <option value="mercury" data-distance-km="57909000" data-direction="Sol → Mercúrio" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html">Sol → Mercúrio</option>
+            <option value="venus" data-distance-km="108210000" data-direction="Sol → Vênus" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html">Sol → Vênus</option>
+            <option value="earth" data-distance-km="149598000" data-direction="Sol → Terra" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html" selected>Sol → Terra</option>
+            <option value="mars" data-distance-km="227956000" data-direction="Sol → Marte" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html">Sol → Marte</option>
+            <option value="jupiter" data-distance-km="778479000" data-direction="Sol → Júpiter" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html">Sol → Júpiter</option>
+            <option value="saturn" data-distance-km="1432041000" data-direction="Sol → Saturno" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html">Sol → Saturno</option>
+            <option value="uranus" data-distance-km="2867043000" data-direction="Sol → Urano" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html">Sol → Urano</option>
+            <option value="neptune" data-distance-km="4514953000" data-direction="Sol → Netuno" data-distance-type="distância orbital média" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html">Sol → Netuno</option>
+          </select>
+          <p class="light-distance-value">Distância: <strong id="lightDistance">149.598.000 km</strong></p>
+          <div class="lab-result" id="lightOutput" aria-live="polite">8 min 19 s</div>
+          <span id="lightContext">Sol → Terra · distância orbital média</span>
+          <p class="lab-source">Para os planetas, usamos a distância orbital média ao Sol; a distância real muda durante a órbita. Para a Lua, usamos a distância média à Terra. Velocidade da luz: aproximadamente 299.792 km/s. <a id="lightSource" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html" target="_blank" rel="noopener noreferrer">Ver fonte da distância na NASA</a> · <a href="https://spaceplace.nasa.gov/light-year/en/" target="_blank" rel="noopener noreferrer">Sobre a velocidade da luz</a>.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script src="../js/data.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

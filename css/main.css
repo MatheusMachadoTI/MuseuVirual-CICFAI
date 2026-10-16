@@ -170,3 +170,13 @@ body.light .hero-copy p{color:#e1e8f2}.light .hero-credit{color:#d5dce7}.light .
   .solar-webgl-help{left:14px;right:14px;bottom:14px;max-width:none}
   .solar-webgl-hud{left:12px;top:12px}
 }
+.lab-description{color:var(--muted)}
+.lab-label{display:block;margin:18px 0 6px;font-size:.88rem;font-weight:700}
+.lab-select{width:100%;min-width:0}
+.lab-number{width:100%;min-width:0}
+.light-distance-value{margin:18px 0 0;color:var(--muted)}
+.light-distance-value strong{color:var(--text)}
+.light-range-note{display:block;margin-top:8px;color:var(--muted)}
+.lab-result-note{margin:-16px 0 14px;color:var(--muted);font-size:.8rem}
+.lab-source{margin:22px 0 0;color:var(--muted);font-size:.78rem;line-height:1.6}
+.lab-source a{text-decoration:underline;text-decoration-color:rgba(114,229,255,.45);text-underline-offset:3px}

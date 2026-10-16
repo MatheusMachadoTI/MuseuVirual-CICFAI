@@ -162,7 +162,7 @@ function initSolar(){
     const THREE=window.THREE;
     const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.outputEncoding=THREE.sRGBEncoding;
     renderer.toneMapping=THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure=1.15;
     renderer.shadowMap.enabled=true;
@@ -273,7 +273,7 @@ function initSolar(){
       }
 
       const t=new THREE.CanvasTexture(c);
-      t.colorSpace=THREE.SRGBColorSpace;
+      t.encoding=THREE.sRGBEncoding;
       t.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),8);
       return t;
     }
@@ -286,7 +286,7 @@ function initSolar(){
       x.fillStyle='rgba(224,238,255,.95)';
       x.shadowColor='#000';x.shadowBlur=10;
       x.fillText(text,256,50);
-      const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;
+      const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
       return t;
     }
 
@@ -469,13 +469,68 @@ function initSolar(){
 }
 function initMuseum(){const grid=$('#museumGrid');if(!grid)return;const search=$('#museumSearch'),filters=$('#museumFilters');let category='Todos',current=0;const cats=['Todos',...new Set(MUSEUM_ITEMS.map(x=>x.category))];filters.innerHTML=cats.map(c=>`<button class="filter ${c==='Todos'?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');const render=()=>{const q=(search.value||'').toLowerCase();const list=MUSEUM_ITEMS.filter(x=>(category==='Todos'||x.category===category)&&`${x.title} ${x.category} ${x.meta} ${x.desc}`.toLowerCase().includes(q));grid.innerHTML=list.map((x,i)=>`<article class="museum-card reveal visible" data-id="${x.id}"><div class="museum-img"><img src="${x.image}" data-alt-src="${esc(x.fallbackImage||'')}" alt="${esc(x.title)}"/><span class="status ${x.status==='OBSERVADO'?'observed':'art'}">${x.status}</span><span class="zoom">＋</span></div><div class="museum-copy"><span>${esc(x.category)}</span><h3>${esc(x.title)}</h3><p>${esc(x.desc)}</p><small>${esc(x.meta)} · ${esc(x.distance)}</small></div></article>`).join('')||'<div class="empty-state"><b>Nenhum registro encontrado</b><span>Altere a busca ou a categoria.</span></div>';initImages();$$('.museum-card',grid).forEach(card=>card.addEventListener('click',()=>openMuseum(card.dataset.id)));}; const openMuseum=id=>{const item=MUSEUM_ITEMS.find(x=>x.id===id);current=MUSEUM_ITEMS.indexOf(item);modal(`<div class="museum-modal"><div class="museum-large"><img src="${item.image}" data-alt-src="${esc(item.fallbackImage||'')}" alt="${esc(item.title)}"></div><div class="museum-details"><span class="eyebrow">${esc(item.category)} · ${esc(item.status)}</span><h2>${esc(item.title)}</h2><p>${esc(item.desc)}</p><div class="detail-pills"><span>${esc(item.meta)}</span><span>${esc(item.distance)}</span></div><div class="source-box"><b>Origem</b><span>${esc(item.source)}</span></div><p class="fine">Classificação visual: ${item.status==='OBSERVADO'?'imagem/dado observacional':'representação artística ou visualização científica'}. O site não apresenta uma ilustração como se fosse fotografia real.</p><div class="modal-nav"><button id="prevMuseum">← Anterior</button><button id="nextMuseum">Próximo →</button></div></div></div>`);$('#prevMuseum')?.addEventListener('click',()=>openMuseum(MUSEUM_ITEMS[(current-1+MUSEUM_ITEMS.length)%MUSEUM_ITEMS.length].id));$('#nextMuseum')?.addEventListener('click',()=>openMuseum(MUSEUM_ITEMS[(current+1)%MUSEUM_ITEMS.length].id));};filters.addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;category=b.dataset.cat;$$('.filter',filters).forEach(x=>x.classList.toggle('active',x===b));render()});search.addEventListener('input',render);render()}
 
-function initPhenomena(){const grid=$('#phenomenaGrid'),detail=$('#phenomenaDetail');if(!grid||!detail)return;let active=PHENOMENA[0];grid.innerHTML=PHENOMENA.map(p=>`<article class="phenomenon-card ${p===active?'active':''}" data-id="${p.id}"><div class="phenomenon-img"><img src="${p.image}" data-alt-src="${esc(p.fallbackImage||'')}" alt="${esc(p.title)}"><span>${p.icon}</span></div><div><small>${esc(p.tag)}</small><h3>${esc(p.title)}</h3><p>${esc(p.short)}</p></div></article>`).join('');const render=p=>{active=p;$$('.phenomenon-card',grid).forEach(c=>c.classList.toggle('active',c.dataset.id===p.id));detail.innerHTML=`<div class="phenomenon-detail-head"><div><span class="eyebrow">${esc(p.tag)}</span><h2>${esc(p.title)}</h2></div><div class="phenomenon-symbol">${p.icon}</div></div><p class="lead">${esc(p.short)}</p><div class="phenomenon-sections">${Object.entries(p.sections).map(([k,v])=>`<section><small>${({oque:'O QUE É?',como:'COMO ACONTECE?',escala:'ESCALA',curiosidade:'CURIOSIDADE'})[k]||k.toUpperCase()}</small><p>${esc(v)}</p></section>`).join('')}</div><div class="phenomenon-bar"><span>MODELO EDUCATIVO</span><i></i><span>OBSERVAÇÃO / FÍSICA</span></div><figure class="phenomenon-detail-media"><img src="${esc(p.image)}" data-alt-src="${esc(p.fallbackImage||'')}" alt="${esc(p.title)} — imagem detalhada" loading="eager" decoding="async"><figcaption>Imagem detalhada do fenômeno · fonte visual astronômica</figcaption></figure>`};$$('.phenomenon-card',grid).forEach(c=>c.addEventListener('click',()=>render(PHENOMENA.find(p=>p.id===c.dataset.id))));render(active);initImages()}
+function initPhenomena(){const grid=$('#phenomenaGrid'),detail=$('#phenomenaDetail');if(!grid||!detail)return;let active=PHENOMENA[0];grid.innerHTML=PHENOMENA.map(p=>`<article class="phenomenon-card ${p===active?'active':''}" data-id="${p.id}"><div class="phenomenon-img"><img src="${p.image}" data-alt-src="${esc(p.fallbackImage||'')}" alt="${esc(p.title)}"><span>${p.icon}</span></div><div><small>${esc(p.tag)}</small><h3>${esc(p.title)}</h3><p>${esc(p.short)}</p></div></article>`).join('');const render=p=>{active=p;$$('.phenomenon-card',grid).forEach(c=>c.classList.toggle('active',c.dataset.id===p.id));detail.innerHTML=`<div class="phenomenon-detail-head"><div><span class="eyebrow">${esc(p.tag)}</span><h2>${esc(p.title)}</h2></div><div class="phenomenon-symbol">${p.icon}</div></div><p class="lead">${esc(p.short)}</p><div class="phenomenon-sections">${Object.entries(p.sections).map(([k,v])=>`<section><small>${({oque:'O QUE É?',como:'COMO ACONTECE?',escala:'ESCALA',curiosidade:'CURIOSIDADE'})[k]||k.toUpperCase()}</small><p>${esc(v)}</p></section>`).join('')}</div><div class="phenomenon-bar"><span>MODELO EDUCATIVO</span><i></i><span>OBSERVAÇÃO / FÍSICA</span></div><figure class="phenomenon-detail-media"><img src="${esc(p.image)}" data-alt-src="${esc(p.fallbackImage||'')}" alt="${esc(p.title)} — imagem detalhada" loading="eager" decoding="async"><figcaption>Imagem detalhada do fenômeno · ${esc(p.credit||'fonte visual astronômica')}</figcaption></figure>`};$$('.phenomenon-card',grid).forEach(c=>c.addEventListener('click',()=>render(PHENOMENA.find(p=>p.id===c.dataset.id))));render(active);initImages()}
 
 function initExploration(){const grid=$('#missionGrid');if(!grid)return;const agency=$('#missionAgency'),search=$('#missionSearch'),year=$('#missionYear');const render=()=>{const q=(search.value||'').toLowerCase();const a=agency.value;const y=year.value;const list=MISSIONS.filter(m=>(a==='all'||m.agency.includes(a))&&(!y||String(m.year)===y)&&`${m.name} ${m.target} ${m.desc}`.toLowerCase().includes(q));grid.innerHTML=list.map(m=>`<article class="mission-card reveal visible"><div class="mission-year">${m.year}</div><div class="mission-line"></div><div class="mission-content"><div class="mission-image"><img src="${m.image}" data-alt-src="${esc(m.fallbackImage||'')}" alt="${esc(m.name)}"></div><div><span class="eyebrow">${esc(m.agency)} · ${esc(m.status)}</span><h3>${esc(m.name)}</h3><p>${esc(m.desc)}</p><div class="mission-meta"><span>DESTINO <b>${esc(m.target)}</b></span><span>ANO <b>${m.year}</b></span></div></div></div></article>`).join('')||'<div class="empty-state"><b>Nenhuma missão encontrada</b></div>';initImages()}; const years=[...new Set(MISSIONS.map(m=>m.year))].sort();year.innerHTML='<option value="">Todas as décadas</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');[agency,search,year].forEach(x=>x.addEventListener('input',render));render()}
 
 function initGlossary(){const grid=$('#glossaryGrid'),input=$('#glossarySearch'),letters=$('#glossaryLetters'),category=$('#glossaryCategory');if(!grid)return;let letter='';const cats=[...new Set(GLOSSARY.map(x=>x[3]))].sort();category.innerHTML='<option value="">Todas as categorias</option>'+cats.map(x=>`<option>${esc(x)}</option>`).join('');letters.innerHTML=['Todos',...new Set(GLOSSARY.map(x=>x[0]))].map(x=>`<button class="filter ${x==='Todos'?'active':''}" data-letter="${x==='Todos'?'':x}">${x}</button>`).join('');const render=()=>{const q=(input.value||'').toLowerCase(),cat=category.value;const list=GLOSSARY.filter(x=>(!letter||x[0]===letter)&&(!cat||x[3]===cat)&&x.slice(1).join(' ').toLowerCase().includes(q));grid.innerHTML=list.map(x=>`<article class="glossary-card"><div class="term-letter">${esc(x[0])}</div><div><span>${esc(x[3])}</span><h3>${esc(x[1])}</h3><p>${esc(x[2])}</p><div class="advanced"><b>Nota avançada</b><span>${esc(x[4])}</span></div></div></article>`).join('')||'<div class="empty-state"><b>Termo não encontrado</b><span>Tente outra palavra ou categoria.</span></div>'};letters.addEventListener('click',e=>{const b=e.target.closest('[data-letter]');if(!b)return;letter=b.dataset.letter;$$('.filter',letters).forEach(x=>x.classList.toggle('active',x===b));render()});input.addEventListener('input',render);category.addEventListener('change',render);render()}
 
-function initLab(){const mass=$('#labMass'),g=$('#labGravity'),weight=$('#labWeight'),planet=$('#labPlanet');if(!mass)return;const update=()=>{const m=+mass.value,gv=+g.value;weight.textContent=`${(m*gv).toFixed(1)} N`;planet.textContent=`${m} kg · gravidade ${gv.toFixed(2)} m/s²`};mass.addEventListener('input',update);g.addEventListener('input',update);update(); const light=$('#lightDistance'),lightOut=$('#lightOutput');light?.addEventListener('input',()=>{const km=+light.value;const seconds=km/299792.458;let text=seconds<60?`${seconds.toFixed(2)} s`:seconds<3600?`${(seconds/60).toFixed(2)} min`:`${(seconds/3600).toFixed(2)} h`;lightOut.textContent=text});light?.dispatchEvent(new Event('input'));}
+function initLab(){
+  const mass=$('#labMass'),gravity=$('#labGravity'),weight=$('#labWeight'),planet=$('#labPlanet');
+  if(!mass||!gravity||!weight||!planet)return;
+  const gravitySource=$('#gravitySource');
+
+  const updateWeight=()=>{
+    const kilograms=mass.valueAsNumber,selected=gravity.selectedOptions[0];
+    const acceleration=Number(selected?.dataset.gravity);
+    if(!mass.value||!mass.checkValidity()||!Number.isFinite(kilograms)||!Number.isFinite(acceleration)){
+      weight.textContent='—';
+      planet.textContent='Informe uma massa entre 1 e 300 kg.';
+      return;
+    }
+    const world=selected.textContent.split(' —')[0];
+    weight.textContent=`${(kilograms*acceleration).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})} N`;
+    planet.textContent=`Peso de ${kilograms.toLocaleString('pt-BR',{maximumFractionDigits:1})} kg ${['Lua','Terra'].includes(world)?'na':'em'} ${world}`;
+    if(gravitySource){
+      gravitySource.href=selected.dataset.source;
+      gravitySource.textContent=`ver ficha oficial: ${world}`;
+    }
+  };
+  mass.addEventListener('input',updateWeight);
+  gravity.addEventListener('change',updateWeight);
+  updateWeight();
+
+  const destination=$('#lightDestination'),distance=$('#lightDistance'),lightOut=$('#lightOutput'),lightContext=$('#lightContext'),lightSource=$('#lightSource');
+  if(!destination||!distance||!lightOut||!lightContext)return;
+  const updateLight=()=>{
+    const selected=destination.selectedOptions[0],km=Number(selected?.dataset.distanceKm);
+    if(!Number.isFinite(km)||km<=0){
+      distance.textContent='—';
+      lightOut.textContent='—';
+      lightContext.textContent='Selecione um destino.';
+      return;
+    }
+    distance.textContent=`${km.toLocaleString('pt-BR')} km`;
+    lightContext.textContent=`${selected.dataset.direction} · ${selected.dataset.distanceType}`;
+    if(lightSource){
+      lightSource.href=selected.dataset.source;
+    }
+    const seconds=km/299792.458;
+    if(seconds<60){
+      lightOut.textContent=`${seconds.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})} s`;
+      return;
+    }
+    const totalSeconds=Math.round(seconds);
+    const hours=Math.floor(totalSeconds/3600);
+    const minutes=Math.floor((totalSeconds%3600)/60);
+    const remainingSeconds=totalSeconds%60;
+    lightOut.textContent=hours
+      ?`${hours} h ${minutes} min ${remainingSeconds} s`
+      :`${Math.floor(totalSeconds/60)} min ${remainingSeconds} s`;
+  };
+  destination.addEventListener('change',updateLight);
+  updateLight();
+}
 
 function initGlobalSearch(){const input=$('#globalSearch'),out=$('#searchResults');if(!input)return;input.addEventListener('input',()=>{const q=input.value.trim().toLowerCase();if(!q){out.hidden=true;return}const ps=SOLAR_SYSTEM.filter(p=>`${p.name} ${p.type}`.toLowerCase().includes(q)).map(p=>`<a href="${root}pages/sistema-solar.html?planet=${p.id}"><b>${esc(p.name)}</b><span>${esc(p.type)}</span></a>`);const gs=GLOSSARY.filter(x=>x.slice(1).join(' ').toLowerCase().includes(q)).slice(0,5).map(x=>`<a href="${root}pages/glossario.html"><b>${esc(x[1])}</b><span>${esc(x[2])}</span></a>`);out.innerHTML=[...ps,...gs].slice(0,8).join('')||'<div class="empty-search">Nenhum resultado encontrado.</div>';out.hidden=false})}
 
