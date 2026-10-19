@@ -181,3 +181,26 @@ body.light .hero-copy p{color:#e1e8f2}.light .hero-credit{color:#d5dce7}.light .
 .lab-source{margin:22px 0 0;color:var(--muted);font-size:.78rem;line-height:1.6}
 .lab-source a{text-decoration:underline;text-decoration-color:rgba(114,229,255,.45);text-underline-offset:3px}
 .solar-info>aside.panel{padding:28px}
+body.light .topbar{background:rgba(248,251,255,.96);border-color:var(--line);backdrop-filter:blur(18px)}
+body.light .nav a{color:var(--muted)}
+body.light .nav a:hover,body.light .nav a.active{color:var(--text);background:rgba(10,30,55,.06)}
+body.light .nav.open{background:#fff}
+body.light .hero-copy h1,body.light .explore-copy h3,body.light .hero-counter,body.light .hero-arrow{color:#f4f7fb}
+body.light .hero-copy .eyebrow,body.light .explore-copy .eyebrow{color:#72e5ff}
+body.light .hero-counter span{color:#b9c5d3}
+body.light .hero-copy .btn:not(.primary){color:#f4f7fb;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25)}
+body.light .eyebrow,body.light .section-id,body.light .museum-copy>span,body.light .mission-meta,body.light .glossary-card>div>span,body.light .planet-kicker,body.light .phenomenon-card small,body.light .phenomenon-sections small,body.light .term-letter{color:#12677c}
+body.light .number,body.light .filter.active,body.light .filter:hover{color:var(--text)}
+body.light .museum-copy small{color:var(--muted)}
+body.light .museum-img:has(img.failed):after{color:#b9c5d3}
+body.light .museum-details p,body.light .detail-pills span,body.light .source-box,body.light .fact-list,body.light .lead,body.light .phenomenon-bar,body.light .advanced b,body.light .advanced span{color:var(--muted)}
+body.light .info-section b,body.light .mission-meta b,body.light .mission-year{color:var(--text)}
+body.light .stat-grid small{color:var(--muted)}
+body.light .phenomenon-symbol{color:#365c9a}
+body.light .modal-box{background:#fff;color:var(--text)}
+body.light .modal-close{background:#f4f7fb;color:var(--text)}
+body.light .search-results{color:#f4f7fb}
+body.light .search-results span{color:#b9c5d3}
+body.light .scale-section{color:#f4f7fb}
+body.light .scale-section .eyebrow,body.light .scale-section .section-id{color:#72e5ff}
+body.light .scale-section .section-head p,body.light .scale-section .scale-index,body.light .scale-section .scale-node small{color:#b9c5d3}
