@@ -204,3 +204,40 @@ body.light .search-results span{color:#b9c5d3}
 body.light .scale-section{color:#f4f7fb}
 body.light .scale-section .eyebrow,body.light .scale-section .section-id{color:#72e5ff}
 body.light .scale-section .section-head p,body.light .scale-section .scale-index,body.light .scale-section .scale-node small{color:#b9c5d3}
+.universe-card{display:flex;flex-direction:column;width:100%;min-height:100%;padding:0;text-align:left;color:var(--text);cursor:pointer;transition:transform .3s,border-color .3s}
+.universe-card:after{z-index:0;pointer-events:none}
+.universe-card:hover{transform:translateY(-6px);border-color:rgba(114,229,255,.35)}
+.universe-card:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+.universe-card-media{display:block;position:relative;z-index:1;height:190px;overflow:hidden;background:radial-gradient(circle,#172942,#05070d)}
+.universe-card-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.universe-card:hover .universe-card-media img{transform:scale(1.045)}
+.universe-card-scale{position:absolute;left:14px;bottom:13px;padding:5px 9px;border:1px solid rgba(255,255,255,.14);border-radius:99px;background:rgba(3,7,13,.72);color:#d8e8fb;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+.universe-card-content{position:relative;z-index:1;display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:22px}
+.universe-card-content .number{font-size:1.8rem}
+.universe-card-content .eyebrow{margin-top:7px}
+.universe-card-title{display:block;margin:10px 0 7px;font:600 1.35rem 'Space Grotesk';}
+.universe-card-summary{display:block;color:var(--muted);font-size:.9rem}
+.universe-card-action{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;margin-top:auto;padding-top:20px;color:var(--cyan);font-size:.78rem;font-weight:700}
+.universe-perspective{padding:35px}
+.universe-perspective p{max-width:850px;color:var(--muted)}
+.universe-detail{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:26px;align-items:start}
+.universe-detail-media{position:sticky;top:0;margin:0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#02050a}
+.universe-detail-media img{display:block;width:100%;height:min(62vh,560px);min-height:320px;object-fit:cover;background:radial-gradient(circle,#152844,#02050a)}
+.universe-detail-media figcaption{padding:11px 14px;color:var(--muted);font-size:.72rem;line-height:1.5}
+.universe-detail-copy{padding:14px 10px 14px 0}
+.universe-detail-copy h2{margin:8px 0 12px;font:700 clamp(2rem,4vw,3.4rem)/1 'Space Grotesk';letter-spacing:-.055em}
+.universe-detail-copy h3{margin:25px 0 8px;font:600 1rem 'Space Grotesk'}
+.universe-detail-overview{color:var(--muted)}
+.universe-facts{display:grid;gap:10px;margin:0;padding-left:20px;color:var(--muted)}
+.universe-facts li{padding-left:3px}
+.universe-source{display:inline-flex;align-items:center;gap:7px;margin-top:25px;color:var(--cyan);font-size:.84rem;font-weight:700;text-decoration:underline;text-decoration-color:rgba(114,229,255,.4);text-underline-offset:4px}
+.universe-source:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+body.light .universe-card-scale{color:#f4f7fb}
+body.light .universe-source{color:#12677c}
+@media(max-width:760px){.universe-card-media{height:175px}.universe-perspective{padding:24px}.universe-detail{grid-template-columns:1fr;gap:16px}.universe-detail-media{position:relative}.universe-detail-media img{height:58vw;min-height:220px;max-height:360px}.universe-detail-copy{padding:4px 2px 12px}}
+.lab-result-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(125px,.8fr);align-items:center;gap:16px;margin:20px 0}
+.lab-result-row .lab-result{margin:4px 0 0;font-size:clamp(2rem,4vw,3.4rem);line-height:1.1}
+.lab-result-label{display:block;color:var(--muted);font-size:.72rem;line-height:1.35}
+.lab-equivalent{padding-left:16px;border-left:1px solid var(--line)}
+.lab-equivalent strong{display:block;margin-top:7px;color:var(--cyan);font:700 clamp(1.55rem,3vw,2.3rem)/1.1 'Space Grotesk';letter-spacing:-.04em}
+@media(max-width:400px){.lab-result-row{grid-template-columns:minmax(0,1fr) minmax(112px,.85fr);gap:10px}.lab-result-row .lab-result{font-size:1.8rem}.lab-equivalent{padding-left:10px}.lab-equivalent strong{font-size:1.5rem}}

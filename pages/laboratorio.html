@@ -53,8 +53,17 @@
             <option value="uranus" data-gravity="9.01" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html">Urano — 9,01 m/s²</option>
             <option value="neptune" data-gravity="11.27" data-source="https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html">Netuno — 11,27 m/s²</option>
           </select>
-          <div class="lab-result" id="labWeight" aria-live="polite">686,5 N</div>
-          <p class="light-range-note">N (newton) é a unidade usada para medir força.</p>
+          <div class="lab-result-row" aria-live="polite">
+            <div>
+              <span class="lab-result-label">Peso neste astro</span>
+              <div class="lab-result" id="labWeight">686,5 N</div>
+            </div>
+            <div class="lab-equivalent">
+              <span class="lab-result-label">Equivalente na Terra</span>
+              <strong id="labEarthEquivalent">70 kg</strong>
+            </div>
+          </div>
+          <p class="light-range-note">N (newton) mede força. O equivalente em kg estima o que essa força indicaria em uma balança ajustada à gravidade da Terra.</p>
           <span id="labPlanet">Peso de 70 kg na Terra</span>
           <p class="lab-source">Gravidade de referência conforme a ficha planetária da NASA: <a id="gravitySource" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html" target="_blank" rel="noopener noreferrer">ver fonte do astro selecionado</a>.</p>
           <p class="light-range-note">O Sol não está incluído: a comparação é entre a Lua e os oito planetas. Gigantes gasosos não têm superfície sólida; seus valores são referências de gravidade.</p>

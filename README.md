@@ -6,7 +6,7 @@ Projeto em HTML5, CSS3 e JavaScript puro.
 - `index.html` — entrada cinematográfica
 - `pages/museu.html` — Acervo Observável
 - `pages/sistema-solar.html` — Sistema Solar interativo
-- `pages/universo.html` — escalas cósmicas
+- `pages/universo.html` — escalas cósmicas interativas, com imagens, informações e fontes oficiais da NASA
 - `pages/exploracao.html` — linha do tempo de missões
 - `pages/fenomenos.html` — enciclopédia visual
 - `pages/laboratorio.html` — simuladores
